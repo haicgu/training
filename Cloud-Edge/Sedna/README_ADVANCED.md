@@ -1,5 +1,18 @@
 # Multi-node Kubernetes+KubeEdge+Sedna Installation Guide
 
+In this tutorial, we will install the following:
+- Docker
+- Kubernetes
+- KubeEdge
+- Sedna
+
+To complete it, you need two VMs:
+- A master VM with with 4 vCPUS, 8GB of RAM, and 100 GB of HD space.
+- A worker VM with with 4 vCPUS, 8GB of RAM, and 100 GB of HD space.
+
+Additionally, you need the resources in this repository (YAML files and AI models).
+
+
 ## Install Docker
 ```
 sudo apt update
@@ -106,7 +119,7 @@ export PATH=$PATH:/usr/local/go/bin (add to .bashrc)
 go version
 ```
 
-## Sedna Installation
+## Install Sedna
 ```
 cd ~
 git clone https://github.com/kubeedge/sedna.git
@@ -129,7 +142,7 @@ make lcimage
 ```
 
 ## Deploy Sedna
-Use the YAML files provided and put them in your home folder. Edit `lc.yaml` to use the IP address of your master node (check the YAML file content).
+Use the YAML files in the `res` subfolder and put them in your home folder. Edit `lc.yaml` to use the IP address of your master node (check the YAML file content).
 
 ```
 cd ~
