@@ -13,7 +13,7 @@ function preparePath() {
 function build() {
     path_build=$path_cur/build
     preparePath $path_build
-    cmake -DCMAKE_BUILD_TYPE=$build_type ..
+    cmake -DCMAKE_BUILD_TYPE=$build_type -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" ..
     make -j
     ret=$?
     cd ..
