@@ -1,0 +1,129 @@
++--------------------------------------------------------------------------------------------+
+| npu-smi 21.0.4                       Version: 21.0.4                                       |
++-------------------+-----------------+------------------------------------------------------+
+| NPU     Name      | Health          | Power(W)     Temp(C)           Hugepages-Usage(page) |
+| Chip    Device    | Bus-Id          | AICore(%)    Memory-Usage(MB)                        |
++===================+=================+======================================================+
+| 2048    310       | OK              | 12.8         46                0    / 970            |
+| 0       0         | 0000:81:00.0    | 0            619  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2048    310       | OK              | 12.8         46                0    / 970            |
+| 1       1         | 0000:82:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2048    310       | OK              | 12.8         48                0    / 970            |
+| 2       2         | 0000:83:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2048    310       | OK              | 12.8         45                0    / 970            |
+| 3       3         | 0000:84:00.0    | 0            612  / 7765                             |
++===================+=================+======================================================+
+| 2049    310       | OK              | 12.8         49                0    / 970            |
+| 0       4         | 0000:85:00.0    | 0            612  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2049    310       | OK              | 12.8         49                0    / 970            |
+| 1       5         | 0000:86:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2049    310       | OK              | 12.8         50                0    / 970            |
+| 2       6         | 0000:87:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2049    310       | OK              | 12.8         49                0    / 970            |
+| 3       7         | 0000:88:00.0    | 0            611  / 7765                             |
++===================+=================+======================================================+
+| 2050    310       | OK              | 12.8         49                0    / 970            |
+| 0       8         | 0000:89:00.0    | 0            612  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2050    310       | OK              | 12.8         50                0    / 970            |
+| 1       9         | 0000:8A:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2050    310       | OK              | 12.8         49                0    / 970            |
+| 2       10        | 0000:8B:00.0    | 0            612  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2050    310       | OK              | 12.8         50                0    / 970            |
+| 3       11        | 0000:8C:00.0    | 0            611  / 7765                             |
++===================+=================+======================================================+
+| 2051    310       | OK              | 12.8         51                0    / 970            |
+| 0       12        | 0000:8D:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2051    310       | OK              | 12.8         50                0    / 970            |
+| 1       13        | 0000:8E:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2051    310       | OK              | 12.8         49                0    / 970            |
+| 2       14        | 0000:8F:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2051    310       | OK              | 12.8         48                0    / 970            |
+| 3       15        | 0000:90:00.0    | 0            610  / 7765                             |
++===================+=================+======================================================+
+| 2052    310       | OK              | 12.8         53                0    / 970            |
+| 0       16        | 0000:91:00.0    | 0            612  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2052    310       | OK              | 12.8         54                0    / 970            |
+| 1       17        | 0000:92:00.0    | 0            612  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2052    310       | OK              | 12.8         56                0    / 970            |
+| 2       18        | 0000:93:00.0    | 0            611  / 7765                             |
++-------------------+-----------------+------------------------------------------------------+
+| 2052    310       | OK              | 12.8         52                0    / 970            |
+| 3       19        | 0000:94:00.0    | 0            611  / 7765                             |
++===================+=================+======================================================+
+WARNING:tensorflow:From main.py:195: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+WARNING:tensorflow:From main.py:61: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+
+WARNING:tensorflow:From main.py:66: FastGFile.__init__ (from tensorflow.python.platform.gfile) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.gfile.GFile.
+WARNING:tensorflow:From main.py:70: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+WARNING:tensorflow:From main.py:90: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
+
+WARNING:tensorflow:From main.py:122: The name tf.gfile.GFile is deprecated. Please use tf.io.gfile.GFile instead.
+
+WARNING:tensorflow:From main.py:123: The name tf.GraphDef is deprecated. Please use tf.compat.v1.GraphDef instead.
+
+2023-01-17 16:05:22.371567: W /dev/shm/snassyr/Kunpeng920/CANNtfplugin/1.9.0/goolf-2022a.9-Python-3.7.5/tensorflow/tf_adapter/util/npu_attrs.cc:122] [GePlugin] DEVICE_ID and ASCEND_DEVICE_ID is none, use default device id : 0, if set session_device_id, session_device_id has a higher priority
+2023-01-17 16:05:22.371626: W /dev/shm/snassyr/Kunpeng920/CANNtfplugin/1.9.0/goolf-2022a.9-Python-3.7.5/tensorflow/tf_adapter/util/ge_plugin.cc:124] [GePlugin] can not find Environment variable : JOB_ID
+########NOW Start Preprocess!!!#########
+Image name: ann1
+Image name: ann2
+Image name: ann3
+Image name: ann4
+Image name: rand1
+images shape (5, 160, 160, 3) float32
+######## Read 5 images #########
+######## NOW Start Batch!!! #########
+######## Object Created #########
+######## NOW Start inference!!! #########
+================== data (1, 160, 160, 3) float32
+2023-01-17 16:05:27.929903: I /dev/shm/snassyr/Kunpeng920/CANNtfplugin/1.9.0/goolf-2022a.9-Python-3.7.5/tensorflow/tf_adapter/kernels/geop_npu.cc:800] The model has been compiled on the Ascend AI processor, current graph id is: 1
+================== data (1, 160, 160, 3) float32
+================== data (1, 160, 160, 3) float32
+================== data (1, 160, 160, 3) float32
+================== data (1, 160, 160, 3) float32
+######## Inference Finished!!! #########
+Record 5 batch intervals
+In total spent [20.360541820526123, 0.004928112030029297, 0.003648996353149414, 0.0035381317138671875, 0.0035190582275390625]
+
+==== Euclidean Distance
+Between ann1 and ann2: 0.211417
+Between ann1 and ann3: 1.094332
+Between ann1 and ann4: 0.745727
+Between ann1 and rand1: 0.824225
+Between ann2 and ann3: 1.074499
+Between ann2 and ann4: 0.673005
+Between ann2 and rand1: 0.998855
+Between ann3 and ann4: 1.449865
+Between ann3 and rand1: 1.361952
+Between ann4 and rand1: 0.862201
+
+==== Cosine Distance
+Between ann1 and ann2: 0.147690
+Between ann1 and ann3: 0.350377
+Between ann1 and ann4: 0.284271
+Between ann1 and rand1: 0.299984
+Between ann2 and ann3: 0.346836
+Between ann2 and ann4: 0.269119
+Between ann2 and rand1: 0.333158
+Between ann3 and ann4: 0.411306
+Between ann3 and rand1: 0.396618
+Between ann4 and rand1: 0.307429
+2023-01-17 16:05:44.551999: W /dev/shm/snassyr/Kunpeng920/CANNtfplugin/1.9.0/goolf-2022a.9-Python-3.7.5/tensorflow/tf_adapter/util/npu_attrs.cc:122] [GePlugin] DEVICE_ID and ASCEND_DEVICE_ID is none, use default device id : 0, if set session_device_id, session_device_id has a higher priority
