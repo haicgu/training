@@ -1,0 +1,9 @@
+onnx
+numpy
+pillow
+pandas
+tabulate
+mindinsight
+onnxruntime
+pycocotools
+opencv-python
