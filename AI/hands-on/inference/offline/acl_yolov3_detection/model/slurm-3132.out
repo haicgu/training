@@ -1,0 +1,49 @@
+ATC start working now, please wait for a moment.
+ATC run success, welcome to the next use.
+
+init resource stage:
+Init resource success
+Init model resource start...
+[AclLiteModel] create model output dataset:
+malloc output 0, size 24576
+malloc output 1, size 32
+Create model output dataset success
+Init model resource success
+decode jpeg end
+[AclLiteImageProc] vpc crop and paste stage:
+[AclLiteImageProc] vpc crop and paste stage success
+resize yuv end
+pre process end
+post process
+[[         6 1425036528 1425036528 1425036528 1425036528 1425036528
+  1425036528 1425036528]]
+box num  6
+
+
+[[297.75         7.3125     141.375      255.5         53.21875
+   75.5625    ]
+ [  4.0625      16.25        34.53125     52.          81.25
+  100.75      ]
+ [397.         106.125      289.5        314.         167.75
+   91.125     ]
+ [234.375      223.5        230.5        225.25       227.125
+  142.75      ]
+ [  0.99316406   0.99121094   0.9902344    0.98339844   0.96191406
+    0.9277344 ]
+ [  0.           0.           0.           0.           0.
+   27.        ]]
+images:../data/peoples.jpg
+======== inference results: =============
+ person: class  0, box  858  11  1145  676, score  0.993164
+ person: class  0, box  21  46  306  644, score  0.991211
+ person: class  0, box  407  99  835  664, score  0.990234
+ person: class  0, box  737  150  905  649, score  0.983398
+ person: class  0, box  153  234  483  655, score  0.961914
+ tie: class  27, box  217  290  262  411, score  0.927734
+acl resource release all resource
+AclLiteModel release source success
+dvpp resource release success
+acl resource release stream
+acl resource release context
+Reset acl device  0
+Release acl resource success
