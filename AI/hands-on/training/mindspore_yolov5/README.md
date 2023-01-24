@@ -24,6 +24,7 @@ Add this scripts.
 #SBATCH --nodes=1
 npu-smi info
 export RANK_SIZE=1
+export DEVICE_ID=1
 python3 train.py  \
     --device_target="Ascend" \
     --data_dir=/home/share/coco/ \
@@ -34,6 +35,12 @@ python3 train.py  \
     --max_epoch=320 \
     --warmup_epochs=4 \
     --train_per_batch_size=32
+```
+You can change training epoch value with changing `max_epoch` flag. Also you need to change this value with editing `default_config.cfg` file.
+
+You can change your NPU device. You should add this export script to your `batchscript.sh` bash command. You should add this before starting training script.
+```bash
+export DEVICE_ID=1 # For training server = 0-7
 ```
 
 You can start the training with slurm.
@@ -55,4 +62,8 @@ Example output;
 ```bash
 cat slurm-1111.out
 ```
+## Copyright
+Huawei Technologies Co., Ltd
 
+## License
+Apache License, Version 2.0

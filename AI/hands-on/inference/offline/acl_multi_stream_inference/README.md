@@ -34,7 +34,6 @@ Add this scripts.
 #SBATCH --time=00:10:00
 #SBATCH --ntasks=1
 #SBATCH --nodes=1
-
 export OPENCV_PATH=$EBROOTOPENCV
 atc --model=yolov3.prototxt --weight=yolov3.caffemodel --framework=0 --output=yolov3 --soc_version=Ascend310 --insert_op_conf=./aipp_yolov3_416_no_csc.cfg 
 cd ../../
@@ -43,6 +42,9 @@ cd dist
 ./main
 EOF
 ```
+
+You can change your NPU device. Before starting your script, you need to configure `data/config/setup.cfg` file. Your choice must be between 0-3.
+
 
 You can start the offline inference with slurm.
 ```bash
@@ -73,7 +75,7 @@ ChannelCount = 1 # number of video/rts stream
 Configure stream path
 ```bash
 # stream of video file/rtsp
-Stream.ch0 = ./data/video/test3.mp4
+Stream.ch0 = ./data/video/test.mp4
 ```
 Configure model input format
 ```bash

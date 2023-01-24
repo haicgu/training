@@ -29,8 +29,12 @@ Add this scripts.
 #SBATCH --nodes=1
 npu-smi info
 export RANK_SIZE=1
-python3 train_npu.py --epochs 1 --batch-size 64 --device_id 0
+python3 train_npu.py --epochs 1 --batch-size 64 --device_id 3
+EOF
 ```
+
+You can change your NPU device. For this example, you need to change `--device_id` flag.
+
 
 You can start the training with slurm.
 ```bash
@@ -41,7 +45,7 @@ You can check your queue with this command.
 ```bash
 squeue
 ```
-You can check the progress with this command. 
+You can check the progress with this command.
 [Example] -> (slurm-xxxx.out = slurm-1111.out)
 ```bash
 tail -f slurm-xxxx.out
@@ -51,3 +55,10 @@ Example output;
 ```bash
 cat slurm-1111.out
 ```
+
+## Copyright
+Huawei Technologies Co., Ltd
+
+## License
+Apache License, Version 2.0
+

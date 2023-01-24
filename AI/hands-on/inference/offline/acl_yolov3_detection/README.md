@@ -30,9 +30,13 @@ Add this scripts.
 #SBATCH --nodes=1
 atc --model=yolov3.prototxt --weight=yolov3.caffemodel --framework=0 --output=yolov3 --soc_version=Ascend310 --insert_op_conf=./aipp_yolov3_416_no_csc.cfg 
 cd ../src
-python3 object_detect.py ../data/
+python3 object_detect.py ../data/ 1
 EOF
 ```
+
+You can change your NPU device. You should change `python3 object_detect.py ../data/ 1` part on the `batchscript.sh` file. You can change this value between 0-3. 
+For example;
+`python3 object_detect.py ../data/ 0` this command runs this example on NPU-0 device.
 
 You can start the offline inference with slurm.
 ```bash

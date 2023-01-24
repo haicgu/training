@@ -13,14 +13,14 @@ import numpy as np
 from tqdm import tqdm
 
 def make_data_loader(args, **kwargs):
-    
+
     train_set = mnist.MNIST(root='./datasets', train=True, transform=ToTensor(), download=True)
     train_sampler = None
 
     if args.multiprocessing_distributed:
         train_sampler = torch.utils.data.distributed.DistributedSampler(train_set)
         train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=False, sampler=train_sampler,**kwargs)
-    else: 
+    else:
         train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=True,**kwargs)
 
     val_set = mnist.MNIST(root='./datasets', train=False, transform=ToTensor(), download=True)
@@ -31,7 +31,7 @@ def make_data_loader(args, **kwargs):
 class Trainer(object):
     def __init__(self, args):
         self.args = args
-        
+
         # Define Dataloader
         kwargs = {'num_workers': args.workers, 'pin_memory': True}
         kwargs['drop_last'] = False if args.multiprocessing_distributed else True
@@ -79,7 +79,7 @@ class Trainer(object):
             image, target = sample[0], sample[1]
             with torch.no_grad():
                 predict_y = self.model(image.to(self.args.device, non_blocking=True))
-            
+
             target = target.to(torch.int32).to(self.args.device, non_blocking=True)
             loss = self.criterion(predict_y, target)
 
@@ -95,7 +95,7 @@ class Trainer(object):
         print()
 
 def parse_args():
-    
+
     parser = argparse.ArgumentParser(description="PyTorch LeNet Training")
     parser.add_argument('--workers', type=int, default=4,
                         metavar='N', help='dataloader threads')
@@ -125,7 +125,7 @@ def parse_args():
                              'either single node or multi node data parallel'
                              'training')
     parser.add_argument('--device_id', default=0, type=int, help='device id')
-    parser.add_argument('--device-list', default='0,1', type=str, help='device id list')
+    parser.add_argument('--device-list', default='0,1,2,3,4,5,6,7', type=str, help='device id list')
     parser.add_argument('--world-size', default=1, type=int,
                     help='number of nodes for distributed training')
     parser.add_argument('--rank', default=0, type=int,
@@ -145,16 +145,16 @@ def device_id_to_process_device_map(device_list):
     return process_device_map
 
 def main_worker(npu, ngpus_per_node, args):
-    
+
     os.environ['MASTER_ADDR'] = '127.0.0.1'
     os.environ['MASTER_PORT'] = '29688'
     args.device_id = args.process_device_map[npu]
 
     if args.multiprocessing_distributed:
         args.rank = args.rank * ngpus_per_node + npu
-        
+
         torch.distributed.init_process_group(backend='hccl', world_size=args.world_size, rank=args.rank)
-    
+
     args.is_master_node = not args.multiprocessing_distributed or npu == 0
     if args.is_master_node:
         print(args)
@@ -204,3 +204,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

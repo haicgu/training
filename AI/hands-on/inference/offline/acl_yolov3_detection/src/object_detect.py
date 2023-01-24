@@ -68,7 +68,7 @@ def post_process(infer_output, origin_img, image_file):
         bottom_right_x = box_info[2 * int(box_num) + n] * scaley
         bottom_right_y = box_info[3 * int(box_num) + n] * scaley
         print(" % s: class % d, box % d % d % d % d, score % f" % (
-            label, ids, top_left_x, top_left_y, 
+            label, ids, top_left_x, top_left_y,
             bottom_right_x, bottom_right_y, score))
         draw.line([(top_left_x, top_left_y), (bottom_right_x, top_left_y), (bottom_right_x, bottom_right_y), \
         (top_left_x, bottom_right_y), (top_left_x, top_left_y)], fill=(0, 200, 100), width=3)
@@ -77,24 +77,24 @@ def post_process(infer_output, origin_img, image_file):
 
 def construct_image_info():
     """construct image info"""
-    image_info = np.array([MODEL_WIDTH, MODEL_HEIGHT, 
-                           MODEL_WIDTH, MODEL_HEIGHT], 
-                           dtype = np.float32) 
+    image_info = np.array([MODEL_WIDTH, MODEL_HEIGHT,
+                           MODEL_WIDTH, MODEL_HEIGHT],
+                           dtype = np.float32)
     return image_info
 
 def main():
     """
     Program execution with picture directory parameters
     """
-    if (len(sys.argv) != 2):
+    if (len(sys.argv) != 3):
         print("The App arg is invalid")
         exit(1)
-    
-    acl_resource = AclLiteResource()
+    device_id = int(sys.argv[2])
+    acl_resource = AclLiteResource(device_id)
     acl_resource.init()
     model = AclLiteModel(MODEL_PATH)
     dvpp = AclLiteImageProc(acl_resource)
-    
+
     #From the parameters of the picture storage directory, reasoning by a picture
     image_dir = sys.argv[1]
     images_list = [os.path.join(image_dir, img)
@@ -113,10 +113,10 @@ def main():
         resized_image = pre_process(image, dvpp)
         print("pre process end")
         #reason pictures
-        result = model.execute([resized_image, image_info])    
+        result = model.execute([resized_image, image_info])
         #process resresults
         post_process(result, image, image_file)
 
 if __name__ == '__main__':
     main()
- 
+

@@ -53,3 +53,9 @@ Example output;
 ```bash
 cat slurm-1111.out
 ```
+
+## Copyright
+Huawei Technologies Co., Ltd
+
+## License
+Apache License, Version 2.0

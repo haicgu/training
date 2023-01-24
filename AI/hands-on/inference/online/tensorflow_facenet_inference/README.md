@@ -30,8 +30,13 @@ Add this scripts.
 #SBATCH --ntasks=1
 #SBATCH --nodes=1
 npu-smi info
+export DEVICE_ID=1
 python3 main.py --model_path ./models/facenet_tf.pb --input_tensor_name input:0 --output_tensor_name embeddings:0 --image_path ./facenet_data
 EOF
+```
+You can change your NPU device. Add this export command to your `batchscript.sh` bash command. You should add this before starting python script.
+```bash
+export DEVICE_ID=1 # For inference server = 0-3
 ```
 
 You can start the online inference with slurm.
@@ -53,3 +58,10 @@ Example output;
 ```bash
 cat slurm-1111.out
 ```
+
+## Copyright
+Huawei Technologies Co., Ltd
+
+## License
+Apache License, Version 2.0
+
