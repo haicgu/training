@@ -1,0 +1,40 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: test
+spec:
+  schedulerName: volcano
+  minAvailable: 3
+  policies:
+    - event: PodEvicted
+      action: RestartJob
+  tasks:
+    - replicas: 1
+      name: "ps"
+      template:
+        spec:
+          containers:
+            - image: alpine
+              command: ["/bin/sh", "-c", "sleep 1000"]
+              imagePullPolicy: IfNotPresent
+              name: ps
+              resources:
+                requests:
+                  cpu: "1"
+          restartPolicy: OnFailure
+    - replicas: 2
+      name: "worker"
+      policies:
+        - event: PodEvicted
+          action: RestartTask
+      template:
+        spec:
+          containers:
+            - image: alpine
+              command: ["/bin/sh", "-c", "sleep 1000"]
+              imagePullPolicy: IfNotPresent
+              name: worker
+              resources:
+                requests:
+                  cpu: "1"
+          restartPolicy: OnFailure

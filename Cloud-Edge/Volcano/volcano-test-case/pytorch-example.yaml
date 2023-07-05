@@ -1,0 +1,32 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: pytorch-job
+spec:
+  minAvailable: 1
+  schedulerName: volcano
+  plugins:
+    pytorch: ["--master=master","--worker=worker","--port=23456"] # Pytorch plugin register
+  tasks:
+    - replicas: 1
+      name: master
+      policies:
+        - event: TaskCompleted
+          action: CompleteJob
+      template:
+        spec:
+          containers:
+            - image: gcr.io/kubeflow-ci/pytorch-dist-sendrecv-test:1.0
+              imagePullPolicy: IfNotPresent
+              name: master
+          restartPolicy: OnFailure
+    - replicas: 2
+      name: worker
+      template:
+        spec:
+          containers:
+            - image: gcr.io/kubeflow-ci/pytorch-dist-sendrecv-test:1.0
+              imagePullPolicy: IfNotPresent
+              name: worker
+              workingDir: /home
+          restartPolicy: OnFailure

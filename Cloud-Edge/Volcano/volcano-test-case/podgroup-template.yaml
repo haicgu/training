@@ -1,0 +1,15 @@
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: PodGroup
+spec:
+  # Specify minMember to 1 to make a driver pod
+  minMember: 1
+  # Specify minResources to support resource reservation (the driver pod resource and executors pod resource should be considered)
+  # It is useful for ensource the available resources meet the minimum requirements of the Spark job and avoiding the
+  # situation where drivers are scheduled, and then they are unable to schedule sufficient executors to progress.
+  minResources:
+    cpu: "4"
+    memory: "5Gi"
+  # Specify the priority, help users to specify job priority in the queue during scheduling.
+  priorityClassName: system-node-critical
+  # Specify the queue, indicates the resource queue which the job should be submitted to
+  queue: default

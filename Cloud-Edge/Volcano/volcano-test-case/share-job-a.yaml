@@ -1,0 +1,22 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: job-a
+spec:
+  queue: queue-a
+  schedulerName: volcano
+  minAvailable: 2
+  tasks:
+    - replicas: 10
+      name: "test"
+      template:
+        spec:
+          containers:
+            - image: alpine
+              command: ["/bin/sh", "-c", "sleep 1000"]
+              imagePullPolicy: IfNotPresent
+              name: running
+              resources:
+                requests:
+                  cpu: "1"
+          restartPolicy: OnFailure

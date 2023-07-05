@@ -1,0 +1,32 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: low-priority
+value: 10
+globalDefault: false
+description: "This priority class should be used for volcano job only."
+
+---
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: priority-low
+spec:
+  schedulerName: volcano
+  minAvailable: 2
+  priorityClassName: low-priority
+  tasks:
+    - replicas: 12
+      name: "test"
+      template:
+        spec:
+          containers:
+            - image: alpine
+              command: ["/bin/sh", "-c", "sleep 1000"]
+              imagePullPolicy: IfNotPresent
+              name: running
+              resources:
+                requests:
+                  cpu: "1"
+          restartPolicy: OnFailure
+
