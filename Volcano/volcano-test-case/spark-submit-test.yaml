@@ -1,0 +1,19 @@
+./spark-3.3.1/bin/spark-submit \
+    --master k8s://https://127.0.0.1:40883 \
+    --deploy-mode cluster \
+    --driver-cores 1 \
+    --driver-memory 2G \
+    --num-executors 3 \
+    --executor-cores 1 \
+    --executor-memory 1G \
+    --name spark-volcano-wy1 \
+    --class org.apache.spark.examples.SparkPi \
+    --conf spark.executor.instances=3 \
+    --conf spark.kubernetes.container.image=wangyang0616/spark:3.3.1-volcano.v1 \
+    --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+    --conf spark.kubernetes.scheduler.name=volcano  \
+    --conf spark.kubernetes.scheduler.volcano.podGroupTemplateFile=/root/GOTC/test-case/spark-test/podgroup-template.yaml \
+    --conf spark.kubernetes.driver.pod.featureSteps=org.apache.spark.deploy.k8s.features.VolcanoFeatureStep \
+    --conf spark.kubernetes.executor.pod.featureSteps=org.apache.spark.deploy.k8s.features.VolcanoFeatureStep \
+    local:///opt/spark/examples/jars/spark-examples_2.12-3.3.1.jar
+
