@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-$USER
+  namespace: decice
+  labels:
+    app: collector-$USER
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: collector-$USER
+  template:
+    metadata:
+      labels:
+        app: collector-$USER
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/edge
+                operator: Exists
+      containers:
+        - image: cn04:30500/$USER-collector:latest
+          name: collector
+          imagePullPolicy: Always
+          env:
+            - name: BROKER_ADDRESS
+              value: "cn04"
+            - name: BROKER_PORT
+              value: "31883"
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: 200m
+      restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet

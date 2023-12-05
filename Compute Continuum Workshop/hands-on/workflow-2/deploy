@@ -1,0 +1,11 @@
+podman build -f collector.dockerfile . -t cn04:30500/"$USER"-collector:latest
+podman build -f aggregator.dockerfile . -t cn04:30500/"$USER"-aggregator:latest
+podman build -f client.dockerfile . -t cn04:30500/"$USER"-client-wf:latest
+
+podman push cn04:30500/"$USER"-collector:latest
+podman push cn04:30500/"$USER"-aggregator:latest
+podman push cn04:30500/"$USER"-client-wf:latest
+
+envsubst < yaml/collector_edge.yaml | kubectl create -f - 
+envsubst < yaml/aggregator_cloud.yaml | kubectl create -f - 
+envsubst < yaml/client.yaml | kubectl create -f - 

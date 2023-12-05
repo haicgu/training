@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publisher-$USER
+  namespace: decice
+  labels:
+    app: publisher-$USER
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: publisher-$USER
+  template:
+    metadata:
+      labels:
+        app: publisher-$USER
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: In
+                values:
+                - worker
+      containers:
+        - image: cn04:30500/$USER-publisher:latest
+          name: publisher
+          imagePullPolicy: Always
+          env:
+            - name: BROKER_ADDRESS
+              value: "mosquitto.decice"
+            - name: BROKER_PORT
+              value: "1883"
+            - name: TOPIC
+              value: "decice"
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: 200m
+      restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+  # namespace: decice
+  # name: publisher-$USER
+  # labels:
+    # name: publisher-$USER
+# spec:
+  # ports:
+    # - port: 32000
+      # targetPort: 1883
+      # name: http-$USER
+      # protocol: TCP
+  # selector:
+    # app: publisher-$USER
+  # type: ClusterIP

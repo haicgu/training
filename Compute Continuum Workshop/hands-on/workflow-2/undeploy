@@ -1,0 +1,3 @@
+envsubst < yaml/collector_edge.yaml | kubectl delete -f - 
+envsubst < yaml/aggregator_cloud.yaml | kubectl delete -f - 
+envsubst < yaml/client.yaml | kubectl delete -f - 

@@ -1,0 +1,8 @@
+podman build -f publisher.dockerfile . -t cn04:30500/"$USER"-publisher:latest
+podman build -f subscriber.dockerfile . -t cn04:30500/"$USER"-subscriber:latest
+
+podman push cn04:30500/"$USER"-publisher:latest
+podman push cn04:30500/"$USER"-subscriber:latest
+
+envsubst < yaml/publisher.yaml | kubectl create -f - 
+envsubst < yaml/subscriber.yaml | kubectl create -f - 

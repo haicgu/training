@@ -1,0 +1,2 @@
+envsubst < yaml/publisher.yaml | kubectl delete -f - 
+envsubst < yaml/subscriber.yaml | kubectl delete -f - 

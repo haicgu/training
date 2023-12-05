@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-$USER
+  namespace: decice
+  labels:
+    app: aggregator-$USER
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aggregator-$USER
+  template:
+    metadata:
+      labels:
+        app: aggregator-$USER
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: In
+                values:
+                - worker
+      containers:
+        - image: cn04:30500/$USER-aggregator:latest
+          name: aggregator
+          imagePullPolicy: Always
+          env:
+            - name: BROKER_ADDRESS
+              value: "mosquitto.decice"
+            - name: BROKER_PORT
+              value: "1883"
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: 200m
+      restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet

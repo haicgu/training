@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-wf-$USER
+  namespace: decice
+  labels:
+    app: client-wf-$USER
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-wf-$USER
+  template:
+    metadata:
+      labels:
+        app: client-wf-$USER
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: In
+                values:
+                - worker
+      containers:
+        - image: cn04:30500/$USER-client-wf:latest
+          name: client-wf
+          imagePullPolicy: Always
+          env:
+            - name: BROKER_ADDRESS
+              value: "mosquitto.decice"
+            - name: BROKER_PORT
+              value: "1883"
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: 200m
+      restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet
