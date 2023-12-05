@@ -1,0 +1,21 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: gang-a
+spec:
+  schedulerName: volcano
+  minAvailable: 20
+  tasks:
+    - replicas: 20
+      name: "test"
+      template:
+        spec:
+          containers:
+            - image: alpine
+              command: ["/bin/sh", "-c", "sleep 1000"]
+              imagePullPolicy: IfNotPresent
+              name: running
+              resources:
+                requests:
+                  cpu: "1"
+          restartPolicy: OnFailure
